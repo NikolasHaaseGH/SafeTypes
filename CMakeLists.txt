@@ -13,9 +13,14 @@ set(MODULES "src/types.cpp" "src/common.cpp" "src/boolean.cpp" "src/decimals.cpp
 
 add_library(${PROJECT_NAME})
 
-if (NOT DEFINED NH_NAMESPACE)
-    add_compile_definitions(NH_NAMESPACE="nh")
+if (NH_NAMESPACE)
+    string(SUBSTRING "${NH_NAMESPACE}" 0 1 firstChar)
+    string(REPLACE "\"" "" RefinedString "${NH_NAMESPACE}")
+    add_compile_definitions(NH_NAMESPACE=${RefinedString})
+else()
+    add_compile_definitions(NH_NAMESPACE=nh)
 endif()
+
 
 target_sources(
   ${PROJECT_NAME}
