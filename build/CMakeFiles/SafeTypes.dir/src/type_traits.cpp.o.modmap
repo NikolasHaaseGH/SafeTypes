@@ -1,6 +1,0 @@
--x c++-module
--fmodule-output=CMakeFiles/SafeTypes.dir/safe_types-type_traits.pcm
--fmodule-file=safe_types:integers=CMakeFiles/SafeTypes.dir/safe_types-integers.pcm
--fmodule-file=safe_types:boolean=CMakeFiles/SafeTypes.dir/safe_types-boolean.pcm
--fmodule-file=safe_types:decimals=CMakeFiles/SafeTypes.dir/safe_types-decimals.pcm
--fmodule-file=safe_types:common=CMakeFiles/SafeTypes.dir/safe_types-common.pcm
