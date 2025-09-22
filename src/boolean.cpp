@@ -2,7 +2,7 @@ module;
 
 #include <functional>
 
-export module safe_types:boolean;
+export module nhtypes:boolean;
 
 import :common;
 

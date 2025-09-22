@@ -15,7 +15,7 @@ target_sources(
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${TEST_INCLUDE_DIRS})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Catch2::Catch2WithMain SafeTypes)
+target_link_libraries(${PROJECT_NAME} PRIVATE Catch2::Catch2WithMain nhtypes)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/catch2/extras)
 

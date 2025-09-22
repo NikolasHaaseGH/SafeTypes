@@ -3,7 +3,7 @@ module;
 #include <limits> 
 #include <type_traits>
 
-export module safe_types:integers;
+export module nhtypes:integers;
 
 import :common;
 import :boolean;

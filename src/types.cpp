@@ -2,7 +2,7 @@ module;
 
 #include <type_traits>
 
-export module safe_types;
+export module nhtypes;
 
 export import :common;
 export import :boolean;

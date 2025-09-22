@@ -5,7 +5,7 @@ module;
 
 export module test.integer;
 
-import safe_types;
+import nhtypes;
 
 using namespace nh;
 

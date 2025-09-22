@@ -5,7 +5,7 @@ module;
 
 export module test.decimal;
 
-import safe_types;
+import nhtypes;
 
 #define Make_Safe_Decimal_Tests(Type, CType)                             \
     TEST_CASE("Test " #Type) {                                           \

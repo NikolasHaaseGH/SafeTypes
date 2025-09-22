@@ -4,7 +4,7 @@ module;
 #include <limits>
 #include <cmath>
 
-export module safe_types:decimals;
+export module nhtypes:decimals;
 
 import :common;
 import :integers;

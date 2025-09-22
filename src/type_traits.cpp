@@ -2,7 +2,7 @@ module;
 
 #include <limits>
 
-export module safe_types:type_traits;
+export module nhtypes:type_traits;
 
 import :integers;
 import :boolean;

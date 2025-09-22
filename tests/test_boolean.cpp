@@ -5,7 +5,7 @@ module;
 
 export module test.boolean;
 
-import safe_types;
+import nhtypes;
 
 TEST_CASE("Test boolean"){
     SECTION("Create booleans") {

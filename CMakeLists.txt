@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(
-  SafeTypes
+  nhtypes
   VERSION 1.0
   DESCRIPTION "Introduces Integers/Decimals and Booleans with runtime error checking"
   LANGUAGES CXX)

@@ -4,7 +4,7 @@ module;
 #include <cstddef>
 #include <cassert>
 
-export module safe_types:common;
+export module nhtypes:common;
 
 export namespace nh {
 
