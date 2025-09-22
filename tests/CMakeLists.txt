@@ -2,7 +2,7 @@ project(UnitTests)
 
 set(TEST_MODULES "test_boolean.cpp" "test_decimal.cpp" "test_integer.cpp")
 
-set(TEST_INCLUDE_DIRS "${HELIUM_EXTERNAL_DIR}/catch2/src")
+set(TEST_INCLUDE_DIRS "/catch2/src")
 
 add_executable(${PROJECT_NAME})
 
