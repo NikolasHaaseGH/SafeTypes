@@ -1,0 +1,128 @@
+{
+	"modules" : 
+	{
+		"test.boolean" : 
+		{
+			"bmi" : "/Users/nikolas/Projects/SafeTypes/build/tests/CMakeFiles/UnitTests.dir/test.boolean.pcm",
+			"is-private" : false
+		},
+		"test.decimal" : 
+		{
+			"bmi" : "/Users/nikolas/Projects/SafeTypes/build/tests/CMakeFiles/UnitTests.dir/test.decimal.pcm",
+			"is-private" : false
+		},
+		"test.integer" : 
+		{
+			"bmi" : "/Users/nikolas/Projects/SafeTypes/build/tests/CMakeFiles/UnitTests.dir/test.integer.pcm",
+			"is-private" : false
+		}
+	},
+	"references" : 
+	{
+		"safe_types" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/SafeTypes.dir/safe_types.pcm"
+		},
+		"safe_types:boolean" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/SafeTypes.dir/safe_types-boolean.pcm"
+		},
+		"safe_types:common" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/SafeTypes.dir/safe_types-common.pcm"
+		},
+		"safe_types:decimals" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/SafeTypes.dir/safe_types-decimals.pcm"
+		},
+		"safe_types:integers" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/SafeTypes.dir/safe_types-integers.pcm"
+		},
+		"safe_types:type_traits" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/SafeTypes.dir/safe_types-type_traits.pcm"
+		},
+		"test.boolean" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "tests/CMakeFiles/UnitTests.dir/test.boolean.pcm"
+		},
+		"test.decimal" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "tests/CMakeFiles/UnitTests.dir/test.decimal.pcm"
+		},
+		"test.integer" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "tests/CMakeFiles/UnitTests.dir/test.integer.pcm"
+		}
+	},
+	"usages" : 
+	{
+		"safe_types" : 
+		[
+			"safe_types:boolean",
+			"safe_types:common",
+			"safe_types:decimals",
+			"safe_types:integers",
+			"safe_types:type_traits"
+		],
+		"safe_types:boolean" : 
+		[
+			"safe_types:common"
+		],
+		"safe_types:decimals" : 
+		[
+			"safe_types:boolean",
+			"safe_types:common",
+			"safe_types:integers"
+		],
+		"safe_types:integers" : 
+		[
+			"safe_types:boolean",
+			"safe_types:common"
+		],
+		"safe_types:type_traits" : 
+		[
+			"safe_types:boolean",
+			"safe_types:common",
+			"safe_types:decimals",
+			"safe_types:integers"
+		],
+		"test.boolean" : 
+		[
+			"safe_types",
+			"safe_types:boolean",
+			"safe_types:common",
+			"safe_types:decimals",
+			"safe_types:integers",
+			"safe_types:type_traits"
+		],
+		"test.decimal" : 
+		[
+			"safe_types",
+			"safe_types:boolean",
+			"safe_types:common",
+			"safe_types:decimals",
+			"safe_types:integers",
+			"safe_types:type_traits"
+		],
+		"test.integer" : 
+		[
+			"safe_types",
+			"safe_types:boolean",
+			"safe_types:common",
+			"safe_types:decimals",
+			"safe_types:integers",
+			"safe_types:type_traits"
+		]
+	}
+}

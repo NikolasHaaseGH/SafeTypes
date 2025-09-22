@@ -1,18 +1,16 @@
 module;
 
-#include "core/macros.hpp"
-
 #include <functional>
 #include <limits>
 #include <cmath>
 
-export module helium.types:decimals;
+export module safe_types:decimals;
 
-import :base;
+import :common;
 import :integers;
 import :boolean;
 
-namespace HE_NAMESPACE {
+namespace nh {
 
 #define FRIEND_ARITHMETIC_OPERATORS(Type) \
     friend Type operator+(Type lhs, Type rhs) { lhs += rhs; return lhs; } \
@@ -22,7 +20,7 @@ namespace HE_NAMESPACE {
 
 
 template <typename FloatingPointType>
-HE_CONSTEXPR HE_INLINE bool isInfinityOrNan(FloatingPointType value) HE_NOEXCEPT
+constexpr inline bool isInfinityOrNan(FloatingPointType value) noexcept
 { 
     return (fabs(value) == std::numeric_limits<FloatingPointType>::infinity()) || std::isnan(value);
 }
@@ -51,13 +49,13 @@ private:
     using Base::m_value;
 
 public:
-    HE_CONSTEXPR HE_INLINE SafeDecimal(ValueType value = 0) HE_NOEXCEPT : Base(value) {
-        detail::Assert(!isInfinityOrNan(value));
+    constexpr inline SafeDecimal(ValueType value = 0) noexcept : Base(value) {
+        Assert(!isInfinityOrNan(value));
     };
 
     template <typename Other>
     requires (sizeof(Other) >= sizeof(ValueType))
-    HE_INLINE HE_CONSTEXPR operator SafeDecimal<Other>() { return m_value; }
+    inline constexpr operator SafeDecimal<Other>() { return m_value; }
 
     template <typename IntType>
     requires(sizeof(IntType) * 8 <= std::numeric_limits<ValueType>::digits)
@@ -68,65 +66,65 @@ public:
     constexpr operator SafeInt<IntType>() { return m_value; }
 
     // Assignemnt Operators
-    HE_CONSTEXPR HE_INLINE Bool operator==(SafeDecimal const &rhs) const HE_NOEXCEPT {
+    constexpr inline Bool operator==(SafeDecimal const &rhs) const noexcept {
         return safeCompare(m_value, rhs.m_value);
     }
 
-    HE_CONSTEXPR HE_INLINE Bool operator!=(SafeDecimal const &rhs) const HE_NOEXCEPT {
+    constexpr inline Bool operator!=(SafeDecimal const &rhs) const noexcept {
         return !safeCompare(m_value, rhs.m_value);
     }
 
-    HE_CONSTEXPR HE_INLINE Bool operator<(SafeDecimal const &rhs) const HE_NOEXCEPT {
+    constexpr inline Bool operator<(SafeDecimal const &rhs) const noexcept {
         return (m_value < rhs.m_value) && !safeCompare(m_value, rhs.m_value);
     }
 
-    HE_CONSTEXPR HE_INLINE Bool operator>(SafeDecimal const &rhs) const HE_NOEXCEPT {
+    constexpr inline Bool operator>(SafeDecimal const &rhs) const noexcept {
         return (m_value > rhs.m_value) && !safeCompare(m_value, rhs.m_value);
     }
 
-    HE_CONSTEXPR HE_INLINE Bool operator<=(SafeDecimal const &rhs) const HE_NOEXCEPT {
+    constexpr inline Bool operator<=(SafeDecimal const &rhs) const noexcept {
         return (m_value <= rhs.m_value || safeCompare(m_value, rhs.m_value));
     }
 
-    HE_CONSTEXPR HE_INLINE Bool operator>=(SafeDecimal const &rhs) const HE_NOEXCEPT {
+    constexpr inline Bool operator>=(SafeDecimal const &rhs) const noexcept {
         return (m_value >= rhs.m_value || safeCompare(m_value, rhs.m_value));
     }
 
     // Assignemnt Operators
-    HE_CONSTEXPR HE_INLINE SafeDecimal &operator%=(SafeDecimal const &rhs) HE_NOEXCEPT {
+    constexpr inline SafeDecimal &operator%=(SafeDecimal const &rhs) noexcept {
         m_value = m_value % rhs.m_value;
         return *this;
     }
 
-    HE_CONSTEXPR HE_INLINE SafeDecimal operator-() HE_NOEXCEPT {        
+    constexpr inline SafeDecimal operator-() noexcept {        
         m_value = -m_value;
         return *this;
     }
 
-    HE_CONSTEXPR HE_INLINE SafeDecimal &operator+=(SafeDecimal const &rhs) HE_NOEXCEPT {  
+    constexpr inline SafeDecimal &operator+=(SafeDecimal const &rhs) noexcept {  
         const ValueType result = m_value + rhs.m_value;
-        detail::Assert(!isInfinityOrNan(result));
+        Assert(!isInfinityOrNan(result));
         m_value = result;
         return *this;
     }
 
-    HE_CONSTEXPR HE_INLINE SafeDecimal &operator-=(SafeDecimal const &rhs) HE_NOEXCEPT {    
+    constexpr inline SafeDecimal &operator-=(SafeDecimal const &rhs) noexcept {    
         const ValueType result = m_value - rhs.m_value;
-        detail::Assert(!isInfinityOrNan(result));
+        Assert(!isInfinityOrNan(result));
         m_value = result;
         return *this;
     }
 
-    HE_CONSTEXPR HE_INLINE SafeDecimal &operator/=(SafeDecimal const &rhs) HE_NOEXCEPT {
+    constexpr inline SafeDecimal &operator/=(SafeDecimal const &rhs) noexcept {
         const ValueType result = m_value / rhs.m_value;
-        detail::Assert(!isInfinityOrNan(result));
+        Assert(!isInfinityOrNan(result));
         m_value = result;
         return *this;
     }
 
-    HE_CONSTEXPR HE_INLINE SafeDecimal &operator*=(SafeDecimal const &rhs) HE_NOEXCEPT {
+    constexpr inline SafeDecimal &operator*=(SafeDecimal const &rhs) noexcept {
         const ValueType result = m_value * rhs.m_value;
-        detail::Assert(!isInfinityOrNan(result));
+        Assert(!isInfinityOrNan(result));
         m_value = result;
         return *this;
     }
@@ -135,9 +133,9 @@ public:
 
 private:
 
-    static HE_CONSTEXPR ValueType EPSILON = std::numeric_limits<ValueType>::epsilon();
+    static constexpr ValueType EPSILON = std::numeric_limits<ValueType>::epsilon();
 
-    static HE_CONSTEXPR HE_INLINE Bool safeCompare(ValueType first, ValueType second, ValueType maxDiff = EPSILON, ValueType maxRelDiff = EPSILON) HE_NOEXCEPT 
+    static constexpr inline Bool safeCompare(ValueType first, ValueType second, ValueType maxDiff = EPSILON, ValueType maxRelDiff = EPSILON) noexcept 
     {
         const ValueType diff = fabs(first - second);
         if (diff <= maxDiff)
@@ -164,15 +162,15 @@ private:
     using Base::m_value;
 
 public:
-    HE_CONSTEXPR HE_INLINE FastDecimal(ValueType value = 0) : Base(value) {}
+    constexpr inline FastDecimal(ValueType value = 0) : Base(value) {}
     
     template <typename Other>
     requires (sizeof(Other) >= sizeof(ValueType))
-    HE_CONSTEXPR HE_INLINE operator FastDecimal<Other>() { return m_value; }
+    constexpr inline operator FastDecimal<Other>() { return m_value; }
 
     template <typename Other>
     requires (sizeof(Other) >= sizeof(ValueType))
-    HE_CONSTEXPR HE_INLINE operator SafeDecimal<Other>() { return m_value; }
+    constexpr inline operator SafeDecimal<Other>() { return m_value; }
 
     template <typename IntType>
     requires(sizeof(IntType) * 8 <= std::numeric_limits<ValueType>::digits)
@@ -182,34 +180,34 @@ public:
     requires(sizeof(IntType) * 8 >= std::numeric_limits<ValueType>::digits)
     constexpr operator FastInt<IntType>() { return m_value; }
 
-    HE_CONSTEXPR HE_INLINE Bool operator==(FastDecimal rhs) const HE_NOEXCEPT { return m_value == rhs.m_value; }
-    HE_CONSTEXPR HE_INLINE Bool operator!=(FastDecimal rhs) const HE_NOEXCEPT { return m_value != rhs.m_value; }
-    HE_CONSTEXPR HE_INLINE Bool operator<(FastDecimal rhs) const HE_NOEXCEPT { return m_value < rhs.m_value; }
-    HE_CONSTEXPR HE_INLINE Bool operator>(FastDecimal rhs) const HE_NOEXCEPT { return m_value > rhs.m_value; }
-    HE_CONSTEXPR HE_INLINE Bool operator<=(FastDecimal rhs) const HE_NOEXCEPT { return m_value <= rhs.m_value; }
-    HE_CONSTEXPR HE_INLINE Bool operator>=(FastDecimal rhs) const HE_NOEXCEPT { return m_value >= rhs.m_value; }
+    constexpr inline Bool operator==(FastDecimal rhs) const noexcept { return m_value == rhs.m_value; }
+    constexpr inline Bool operator!=(FastDecimal rhs) const noexcept { return m_value != rhs.m_value; }
+    constexpr inline Bool operator<(FastDecimal rhs) const noexcept { return m_value < rhs.m_value; }
+    constexpr inline Bool operator>(FastDecimal rhs) const noexcept { return m_value > rhs.m_value; }
+    constexpr inline Bool operator<=(FastDecimal rhs) const noexcept { return m_value <= rhs.m_value; }
+    constexpr inline Bool operator>=(FastDecimal rhs) const noexcept { return m_value >= rhs.m_value; }
 
-    HE_CONSTEXPR HE_INLINE FastDecimal & operator%=(FastDecimal rhs) HE_NOEXCEPT {
+    constexpr inline FastDecimal & operator%=(FastDecimal rhs) noexcept {
         m_value = m_value % rhs.m_value;
         return *this;
     }
 
-    HE_CONSTEXPR HE_INLINE FastDecimal & operator+=(FastDecimal rhs) HE_NOEXCEPT {
+    constexpr inline FastDecimal & operator+=(FastDecimal rhs) noexcept {
         m_value = m_value + rhs.m_value;
         return *this;
     };
 
-    HE_CONSTEXPR HE_INLINE FastDecimal & operator-=(FastDecimal rhs) HE_NOEXCEPT {
+    constexpr inline FastDecimal & operator-=(FastDecimal rhs) noexcept {
         m_value = m_value - rhs.m_value;
         return *this;
     };
 
-    HE_CONSTEXPR HE_INLINE FastDecimal & operator/=(FastDecimal rhs) HE_NOEXCEPT {
+    constexpr inline FastDecimal & operator/=(FastDecimal rhs) noexcept {
         m_value = m_value / rhs.m_value;
         return *this;
     };
 
-    HE_CONSTEXPR HE_INLINE FastDecimal & operator*=(FastDecimal rhs) HE_NOEXCEPT {
+    constexpr inline FastDecimal & operator*=(FastDecimal rhs) noexcept {
         m_value = m_value * rhs.m_value;
         return *this;
     };
@@ -219,7 +217,7 @@ public:
 
 }
 
-export namespace HE_NAMESPACE 
+export namespace nh 
 {
     using FastFloat = FastDecimal<float>;
     using FastDouble = FastDecimal<double>;
@@ -229,15 +227,15 @@ export namespace HE_NAMESPACE
 
 export namespace std {
     template <typename T>
-    struct hash<HE_NAMESPACE::FastDecimal<T>> {
-        size_t operator()(const HE_NAMESPACE::FastDecimal<T>& value) const noexcept {
+    struct hash<nh::FastDecimal<T>> {
+        size_t operator()(const nh::FastDecimal<T>& value) const noexcept {
             return +value;
         }
     };
 
     template <typename T>
-    struct hash<HE_NAMESPACE::SafeDecimal<T>> {
-        size_t operator()(const HE_NAMESPACE::SafeDecimal<T>& value) const noexcept {
+    struct hash<nh::SafeDecimal<T>> {
+        size_t operator()(const nh::SafeDecimal<T>& value) const noexcept {
             return +value;
         }
     };

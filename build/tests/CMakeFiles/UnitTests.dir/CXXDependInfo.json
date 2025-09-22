@@ -1,0 +1,60 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "",
+	"config" : "",
+	"cxx-modules" : 
+	{
+		"tests/CMakeFiles/UnitTests.dir/test_boolean.cpp.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "",
+			"source" : "/Users/nikolas/Projects/SafeTypes/tests/test_boolean.cpp",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		},
+		"tests/CMakeFiles/UnitTests.dir/test_decimal.cpp.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "",
+			"source" : "/Users/nikolas/Projects/SafeTypes/tests/test_decimal.cpp",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		},
+		"tests/CMakeFiles/UnitTests.dir/test_integer.cpp.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "",
+			"source" : "/Users/nikolas/Projects/SafeTypes/tests/test_integer.cpp",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		}
+	},
+	"database-info" : null,
+	"dir-cur-bld" : "/Users/nikolas/Projects/SafeTypes/build/tests",
+	"dir-cur-src" : "/Users/nikolas/Projects/SafeTypes/tests",
+	"dir-top-bld" : "/Users/nikolas/Projects/SafeTypes/build",
+	"dir-top-src" : "/Users/nikolas/Projects/SafeTypes",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"/Users/nikolas/Projects/SafeTypes/tests/catch2/src",
+		"/Users/nikolas/Projects/SafeTypes/tests/catch2/src/catch2/..",
+		"tests/catch2/generated-includes"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : 
+	[
+		"/Users/nikolas/Projects/SafeTypes/build/CMakeFiles/SafeTypes.dir"
+	],
+	"module-dir" : "/Users/nikolas/Projects/SafeTypes/build/tests/CMakeFiles/UnitTests.dir",
+	"sources" : {}
+}

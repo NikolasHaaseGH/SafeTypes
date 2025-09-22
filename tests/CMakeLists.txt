@@ -1,5 +1,7 @@
 project(UnitTests)
 
+add_subdirectory(catch2)
+
 set(TEST_MODULES "test_boolean.cpp" "test_decimal.cpp" "test_integer.cpp")
 
 set(TEST_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/catch2/src")
@@ -13,9 +15,9 @@ target_sources(
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${TEST_INCLUDE_DIRS})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Catch2::Catch2WithMain safe_types)
+target_link_libraries(${PROJECT_NAME} PRIVATE Catch2::Catch2WithMain SafeTypes)
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/../external/Catch2/extras)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/catch2/extras)
 
 enable_testing()
 include(CTest)

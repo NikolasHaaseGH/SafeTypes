@@ -5,12 +5,12 @@ module;
 
 export module test.boolean;
 
-import helium.types;
+import safe_types;
 
 TEST_CASE("Test boolean"){
     SECTION("Create booleans") {
-        he::Bool a = 0;
-        he::Bool b = 1;
-        he::Bool c = 2;
+        nh::Bool a = 0;
+        nh::Bool b = 1;
+        nh::Bool c = 2;
     }
 }

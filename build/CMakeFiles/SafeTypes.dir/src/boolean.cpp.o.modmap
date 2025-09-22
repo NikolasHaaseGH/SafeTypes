@@ -1,0 +1,3 @@
+-x c++-module
+-fmodule-output=CMakeFiles/SafeTypes.dir/safe_types-boolean.pcm
+-fmodule-file=safe_types:common=CMakeFiles/SafeTypes.dir/safe_types-common.pcm

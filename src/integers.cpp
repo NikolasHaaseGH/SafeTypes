@@ -1,33 +1,17 @@
 module;
 
-#include "core/macros.hpp"
 #include <limits> 
 #include <type_traits>
 
-export module helium.types:integers;
+export module safe_types:integers;
 
-import :base;
+import :common;
 import :boolean;
 
 #define ENABLE_IF_UNSIGNED(Type) requires(std::is_unsigned_v<Type>)
 #define ENABLE_IF_SIGNED(Type) requires(std::is_signed_v<Type>)
 
-#define SAFE_ASSERT(condition) \
-    if consteval { \
-        /*static_assert(condition);*/ \
-    } else  { \
-        detail::Assert(condition); \
-    } \
-
-#define FAST_ASSERT(condition) \
-    if consteval { \
-        /*static_assert(condition);*/ \
-    } else  { \
-        detail::DebugAssert(condition); \
-    } \
-
-
-namespace HE_NAMESPACE {
+namespace nh {
 
 #define FRIEND_COMPARISON_OPERATORS(Type)                                         \
     friend constexpr bool operator==(Type lhs, Type rhs) { return +lhs == +rhs; } \
@@ -53,10 +37,10 @@ namespace HE_NAMESPACE {
 
     template <typename IntType>
     struct IntBase {
-        constexpr IntBase(IntType value = 0) : m_value(value) {}
+        constexpr inline IntBase(IntType value = 0) : m_value(value) {}
 
-        constexpr IntType operator+() const { return m_value; }
-        explicit constexpr operator IntType() const { return m_value; }
+        constexpr inline IntType operator+() const { return m_value; }
+        explicit constexpr inline operator IntType() const { return m_value; }
 
         static constexpr IntType Max = std::numeric_limits<IntType>::max();
         static constexpr IntType Min = std::numeric_limits<IntType>::min();
@@ -73,12 +57,12 @@ namespace HE_NAMESPACE {
         using CType = IntType;
     
     public:      
-        constexpr SafeInt(int64_t value = 0) ENABLE_IF_SIGNED(IntType) : Base(value) {
-            SAFE_ASSERT(value >= Min && value <= Max);
+        constexpr inline SafeInt(int64_t value = 0) ENABLE_IF_SIGNED(IntType) : Base(value) {
+            Assert(value >= Min && value <= Max);
         }
 
-        constexpr SafeInt(uint64_t value = 0) ENABLE_IF_UNSIGNED(IntType) : Base(value) {
-            SAFE_ASSERT(value <= Max);
+        constexpr inline SafeInt(uint64_t value = 0) ENABLE_IF_UNSIGNED(IntType) : Base(value) {
+            Assert(value <= Max);
         }
 
         template <typename Other>
@@ -90,35 +74,35 @@ namespace HE_NAMESPACE {
         constexpr operator SafeInt<Other>() const { return static_cast<Other>(m_value); }
 
         constexpr SafeInt & operator++() {
-            detail::Assert(m_value != Max);
+            Assert(m_value != Max);
             ++m_value; return *this; 
         }
 
         constexpr SafeInt & operator--() { 
-            detail::Assert(m_value != Min);
+            Assert(m_value != Min);
             --m_value; return *this; 
         }
 
         constexpr SafeInt operator++(auto) { 
-            detail::Assert(m_value != Max);
+            Assert(m_value != Max);
             return m_value++; 
         }
 
         constexpr SafeInt operator--(auto) { 
-            detail::Assert(m_value != Min);
+            Assert(m_value != Min);
             return m_value--; 
         }
 
         constexpr SafeInt & operator%=(SafeInt rhs) { m_value %= rhs.m_value; return *this;}
 
         constexpr SafeInt operator-() const ENABLE_IF_SIGNED(IntType) {
-            detail::Assert(m_value != Min);
+            Assert(m_value != Min);
             return -m_value; 
         }
 
         constexpr SafeInt & operator+=(SafeInt rhs) ENABLE_IF_UNSIGNED(IntType) { 
             const IntType result = m_value + rhs.m_value;
-            detail::Assert(result >= m_value);        
+            Assert(result >= m_value);        
             m_value = result; 
             return *this; 
         }
@@ -128,14 +112,14 @@ namespace HE_NAMESPACE {
                 (rhs.m_value > 0 && m_value > Max - rhs.m_value) ||
                 (rhs.m_value < 0 && m_value < Min - rhs.m_value)
             };
-            detail::Assert(!didOverflow);
+            Assert(!didOverflow);
             m_value += rhs.m_value; 
             return *this; 
         }
 
         constexpr SafeInt & operator-=(SafeInt rhs) ENABLE_IF_UNSIGNED(IntType) { 
             const IntType result = m_value - rhs.m_value; 
-            detail::Assert(result <= m_value); // result > m_value -> overflow
+            Assert(result <= m_value); // result > m_value -> overflow
             m_value = result; 
             return *this;
         }
@@ -145,13 +129,13 @@ namespace HE_NAMESPACE {
                 (rhs.m_value < 0 && m_value > Max + rhs.m_value) ||
                 (rhs.m_value > 0 && m_value < Min + rhs.m_value)
             };
-            detail::Assert(!didOverflow);
+            Assert(!didOverflow);
             m_value -= rhs.m_value;  
             return *this;
         }
 
         constexpr SafeInt & operator/=(SafeInt rhs) ENABLE_IF_UNSIGNED(IntType) {
-            detail::Assert(rhs.m_value != 0);
+            Assert(rhs.m_value != 0);
             m_value = m_value / rhs.m_value; 
             return *this;
         }
@@ -160,7 +144,7 @@ namespace HE_NAMESPACE {
             const bool didOverflow {
                 rhs.m_value == 0 || (rhs.m_value == -1 && m_value == Min)
             };
-            detail::Assert(!didOverflow);
+            Assert(!didOverflow);
             m_value *= rhs.m_value;
             return *this; 
         }
@@ -168,7 +152,7 @@ namespace HE_NAMESPACE {
         constexpr SafeInt & operator*=(SafeInt rhs) ENABLE_IF_UNSIGNED(IntType) {
             const IntType result = m_value * rhs.m_value;
             const bool didOverflow = result < m_value && rhs.m_value != 0;
-            detail::Assert(!didOverflow);
+            Assert(!didOverflow);
             m_value = result; 
             return *this;
         }
@@ -180,7 +164,7 @@ namespace HE_NAMESPACE {
                 (rhs.m_value != 0 && m_value > Max / rhs.m_value) ||
                 (rhs.m_value != 0 && m_value < Min / rhs.m_value)
             };
-            detail::Assert(!didOverflow);
+            Assert(!didOverflow);
             m_value *= rhs.m_value; 
             return *this;
         }
@@ -192,14 +176,14 @@ namespace HE_NAMESPACE {
 
         constexpr SafeInt & operator<<=(SafeInt rhs) ENABLE_IF_UNSIGNED(IntType) { 
             const bool didOverflow = rhs.m_value >= sizeof(IntType)*8;
-            detail::Assert(!didOverflow);
+            Assert(!didOverflow);
             m_value <<= rhs.m_value;
             return *this;
         }
 
         constexpr SafeInt & operator>>=(SafeInt rhs) ENABLE_IF_UNSIGNED(IntType) { 
             const bool didOverflow = rhs.m_value >= sizeof(IntType)*8;
-            detail::Assert(!didOverflow);
+            Assert(!didOverflow);
             m_value >>= rhs.m_value;
             return *this;
         }
@@ -223,10 +207,8 @@ namespace HE_NAMESPACE {
 
     public:
         constexpr FastInt(uint64_t value = 0) ENABLE_IF_UNSIGNED(IntType) : Base(value) {
-            FAST_ASSERT(value <= Max);
         }
         constexpr FastInt(int64_t value = 0) ENABLE_IF_SIGNED(IntType) : Base(value) {
-            FAST_ASSERT(value >= Min && value <= Max);
         }
 
         template <typename Other>
@@ -274,7 +256,7 @@ namespace HE_NAMESPACE {
 
 }
 
-export namespace HE_NAMESPACE 
+export namespace nh 
 {
     using FastI8 = FastInt<int8_t>;
     using FastI16 = FastInt<int16_t>;
@@ -310,15 +292,15 @@ export namespace HE_NAMESPACE
 
 export namespace std {
     template <typename T>
-    struct hash<HE_NAMESPACE::FastInt<T>> {
-        size_t operator()(const HE_NAMESPACE::FastInt<T>& value) const noexcept {
+    struct hash<nh::FastInt<T>> {
+        size_t operator()(const nh::FastInt<T>& value) const noexcept {
             return +value;
         }
     };
 
     template <typename T>
-    struct hash<HE_NAMESPACE::SafeInt<T>> {
-        size_t operator()(const HE_NAMESPACE::SafeInt<T>& value) const noexcept {
+    struct hash<nh::SafeInt<T>> {
+        size_t operator()(const nh::SafeInt<T>& value) const noexcept {
             return +value;
         }
     };

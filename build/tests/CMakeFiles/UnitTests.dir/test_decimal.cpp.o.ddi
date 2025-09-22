@@ -1,0 +1,21 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "tests/CMakeFiles/UnitTests.dir/test_decimal.cpp.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "test.decimal",
+          "source-path": "/Users/nikolas/Projects/SafeTypes/tests/test_decimal.cpp"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "safe_types"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

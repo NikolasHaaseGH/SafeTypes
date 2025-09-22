@@ -1,0 +1,19 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles/SafeTypes.dir/src/types.cpp.o | CMakeFiles/SafeTypes.dir/safe_types.pcm: dyndep | CMakeFiles/SafeTypes.dir/safe_types-common.pcm CMakeFiles/SafeTypes.dir/safe_types-boolean.pcm CMakeFiles/SafeTypes.dir/safe_types-integers.pcm CMakeFiles/SafeTypes.dir/safe_types-decimals.pcm CMakeFiles/SafeTypes.dir/safe_types-type_traits.pcm
+  restat = 1
+
+build CMakeFiles/SafeTypes.dir/src/common.cpp.o | CMakeFiles/SafeTypes.dir/safe_types-common.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/SafeTypes.dir/src/boolean.cpp.o | CMakeFiles/SafeTypes.dir/safe_types-boolean.pcm: dyndep | CMakeFiles/SafeTypes.dir/safe_types-common.pcm
+  restat = 1
+
+build CMakeFiles/SafeTypes.dir/src/decimals.cpp.o | CMakeFiles/SafeTypes.dir/safe_types-decimals.pcm: dyndep | CMakeFiles/SafeTypes.dir/safe_types-common.pcm CMakeFiles/SafeTypes.dir/safe_types-integers.pcm CMakeFiles/SafeTypes.dir/safe_types-boolean.pcm
+  restat = 1
+
+build CMakeFiles/SafeTypes.dir/src/integers.cpp.o | CMakeFiles/SafeTypes.dir/safe_types-integers.pcm: dyndep | CMakeFiles/SafeTypes.dir/safe_types-common.pcm CMakeFiles/SafeTypes.dir/safe_types-boolean.pcm
+  restat = 1
+
+build CMakeFiles/SafeTypes.dir/src/type_traits.cpp.o | CMakeFiles/SafeTypes.dir/safe_types-type_traits.pcm: dyndep | CMakeFiles/SafeTypes.dir/safe_types-integers.pcm CMakeFiles/SafeTypes.dir/safe_types-boolean.pcm CMakeFiles/SafeTypes.dir/safe_types-decimals.pcm
+  restat = 1
+

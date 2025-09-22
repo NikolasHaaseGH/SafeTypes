@@ -1,0 +1,16 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/SafeTypes.dir/src/common.cpp.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "safe_types:common",
+          "source-path": "/Users/nikolas/Projects/SafeTypes/src/common.cpp"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

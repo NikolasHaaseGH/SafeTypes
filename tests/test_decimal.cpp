@@ -5,7 +5,7 @@ module;
 
 export module test.decimal;
 
-import helium.types;
+import safe_types;
 
 #define Make_Safe_Decimal_Tests(Type, CType)                             \
     TEST_CASE("Test " #Type) {                                           \
@@ -21,4 +21,4 @@ import helium.types;
         REQUIRE_NOTHROW(Type(Min));                                      \
     }
 
-Make_Safe_Decimal_Tests(he::SafeFloat, float);
+Make_Safe_Decimal_Tests(nh::SafeFloat, float);

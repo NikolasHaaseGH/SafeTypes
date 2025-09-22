@@ -1,0 +1,24 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/SafeTypes.dir/src/integers.cpp.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "safe_types:integers",
+          "source-path": "/Users/nikolas/Projects/SafeTypes/src/integers.cpp"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "safe_types:common"
+        },
+        {
+          "logical-name": "safe_types:boolean"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

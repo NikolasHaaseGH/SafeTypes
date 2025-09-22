@@ -1,10 +1,8 @@
 module;
 
-#include "core/macros.hpp"
-
 #include <limits>
 
-export module helium.types:type_traits;
+export module safe_types:type_traits;
 
 import :integers;
 import :boolean;

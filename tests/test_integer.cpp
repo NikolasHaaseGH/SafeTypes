@@ -5,9 +5,9 @@ module;
 
 export module test.integer;
 
-import helium.types;
+import safe_types;
 
-using namespace he;
+using namespace nh;
 
 TEST_CASE("Convert between integer types")
 {
