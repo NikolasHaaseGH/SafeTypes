@@ -6,7 +6,7 @@ module;
 
 export module nhtypes:common;
 
-export namespace NH_NAMESAPCE {
+export namespace NH_NAMESPACE {
 
     using uint8_t = std::uint8_t; 
     using uint16_t = std::uint16_t;
@@ -21,7 +21,7 @@ export namespace NH_NAMESAPCE {
     using size_t = std::size_t;
 }
 
-namespace NH_NAMESAPCE {
+namespace NH_NAMESPACE {
 
     void DebugBreak()
     {

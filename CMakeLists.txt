@@ -13,9 +13,7 @@ set(MODULES "src/types.cpp" "src/common.cpp" "src/boolean.cpp" "src/decimals.cpp
 
 add_library(${PROJECT_NAME})
 
-if(CUSTOM_NAMESPACE)
-    add_compile_definitions(NH_NAMESPACE="${CUSTOM_NAMESPACE}")
-else()
+if (NOT DEFINED NH_NAMESPACE)
     add_compile_definitions(NH_NAMESPACE="nh")
 endif()
 

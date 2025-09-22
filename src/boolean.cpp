@@ -6,7 +6,7 @@ export module nhtypes:boolean;
 
 import :common;
 
-export namespace NH_NAMESAPCE {
+export namespace NH_NAMESPACE {
 
 enum class BooleanValue : bool {
     False = 0,
@@ -74,8 +74,8 @@ struct Bool {
 
 export namespace std {
     template <>
-    struct hash<NH_NAMESAPCE::Bool> {
-        size_t operator()(const NH_NAMESAPCE::Bool & value) const {
+    struct hash<NH_NAMESPACE::Bool> {
+        size_t operator()(const NH_NAMESPACE::Bool & value) const {
             return +value;
         }
     };
