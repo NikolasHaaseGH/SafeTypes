@@ -10,7 +10,7 @@ import :common;
 import :integers;
 import :boolean;
 
-namespace nh {
+namespace NH_NAMESAPCE {
 
 #define FRIEND_ARITHMETIC_OPERATORS(Type) \
     friend Type operator+(Type lhs, Type rhs) { lhs += rhs; return lhs; } \
@@ -217,7 +217,7 @@ public:
 
 }
 
-export namespace nh 
+export namespace NH_NAMESAPCE 
 {
     using FastFloat = FastDecimal<float>;
     using FastDouble = FastDecimal<double>;
@@ -227,15 +227,15 @@ export namespace nh
 
 export namespace std {
     template <typename T>
-    struct hash<nh::FastDecimal<T>> {
-        size_t operator()(const nh::FastDecimal<T>& value) const noexcept {
+    struct hash<NH_NAMESAPCE::FastDecimal<T>> {
+        size_t operator()(const NH_NAMESAPCE::FastDecimal<T>& value) const noexcept {
             return +value;
         }
     };
 
     template <typename T>
-    struct hash<nh::SafeDecimal<T>> {
-        size_t operator()(const nh::SafeDecimal<T>& value) const noexcept {
+    struct hash<NH_NAMESAPCE::SafeDecimal<T>> {
+        size_t operator()(const NH_NAMESAPCE::SafeDecimal<T>& value) const noexcept {
             return +value;
         }
     };

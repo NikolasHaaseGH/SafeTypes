@@ -11,7 +11,7 @@ import :boolean;
 #define ENABLE_IF_UNSIGNED(Type) requires(std::is_unsigned_v<Type>)
 #define ENABLE_IF_SIGNED(Type) requires(std::is_signed_v<Type>)
 
-namespace nh {
+namespace NH_NAMESAPCE {
 
 #define FRIEND_COMPARISON_OPERATORS(Type)                                         \
     friend constexpr bool operator==(Type lhs, Type rhs) { return +lhs == +rhs; } \
@@ -256,7 +256,7 @@ namespace nh {
 
 }
 
-export namespace nh 
+export namespace NH_NAMESAPCE 
 {
     using FastI8 = FastInt<int8_t>;
     using FastI16 = FastInt<int16_t>;
@@ -292,15 +292,15 @@ export namespace nh
 
 export namespace std {
     template <typename T>
-    struct hash<nh::FastInt<T>> {
-        size_t operator()(const nh::FastInt<T>& value) const noexcept {
+    struct hash<NH_NAMESAPCE::FastInt<T>> {
+        size_t operator()(const NH_NAMESAPCE::FastInt<T>& value) const noexcept {
             return +value;
         }
     };
 
     template <typename T>
-    struct hash<nh::SafeInt<T>> {
-        size_t operator()(const nh::SafeInt<T>& value) const noexcept {
+    struct hash<NH_NAMESAPCE::SafeInt<T>> {
+        size_t operator()(const NH_NAMESAPCE::SafeInt<T>& value) const noexcept {
             return +value;
         }
     };

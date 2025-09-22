@@ -10,7 +10,7 @@ export import :integers;
 export import :decimals;
 export import :type_traits;
 
-export namespace nh {
+export namespace NH_NAMESAPCE {
 
 template <typename T>
 concept isHeliumInteger =
